@@ -10,6 +10,7 @@ import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
+import androidx.lifecycle.ViewModelProvider
 import com.google.gson.Gson
 import com.hank.dev.databinding.ActivityMainBinding
 import kotlinx.coroutines.CoroutineScope
@@ -23,6 +24,7 @@ import kotlin.math.log
 
 class MainActivity : AppCompatActivity(), CoroutineScope {
 
+    private lateinit var viewModel: MyViewModel
     private val TAG: String? = MainActivity::class.java.simpleName
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
@@ -35,21 +37,14 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
         setContentView(binding.root)
         setSupportActionBar(binding.toolbar)
 
+        viewModel = ViewModelProvider(this).get(MyViewModel::class.java)
+
         binding.fab.setOnClickListener { view ->
             Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                 .setAction("Action", null).show()
         }
-
-        launch {
-            val json = URL("https://api.jsonserve.com/pcLzBT").readText()
-            Log.d(TAG, "onCreate: ${json}")
-//            parseJSON(json)
-            val words = Gson().fromJson(json, Words::class.java)
-            words.words.forEach { w ->
-                Log.d(TAG, "onCreate: ${w.name} / ${w.means}")
-            }
-
-        }
+        //JSON
+        viewModel.readJSON()
 
     }
 
