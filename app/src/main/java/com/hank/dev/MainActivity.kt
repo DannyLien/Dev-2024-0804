@@ -11,6 +11,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.ArrayAdapter
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.gson.Gson
@@ -90,6 +91,14 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_settings -> true
+            R.id.action_camera -> {
+                Toast.makeText(this, "You choose Camera", Toast.LENGTH_LONG).show()
+                true
+            }
+            R.id.action_test -> {
+                Toast.makeText(this, "You choose Test", Toast.LENGTH_LONG).show()
+                true
+            }
             else -> super.onOptionsItemSelected(item)
         }
     }
