@@ -11,6 +11,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import android.view.Menu
 import android.view.MenuItem
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.gson.Gson
 import com.hank.dev.databinding.ActivityMainBinding
 import kotlinx.coroutines.CoroutineScope
@@ -45,6 +46,17 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
         }
         //JSON
         viewModel.readJSON()
+        //names
+        val names = listOf<String>(
+            "Aaren", "Abbe", "Adele", "Carlyn", "Carol", "Cassy",
+            "Claudis", "Dale", "Debra", "Ellen", "Gilberta", "Hallie",
+            "Isabelle", "Jacklyn", "Jaimie", "Jenifer", "Kaitlin", "Kaja"
+        )
+        //RecycleView
+        val recyler = binding.contentView.recycler
+        recyler.setHasFixedSize(true)
+        recyler.layoutManager = LinearLayoutManager(this)
+        recyler.adapter = NameAdapter(names)
 
     }
 
