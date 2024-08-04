@@ -20,12 +20,12 @@ import java.net.URL
 import kotlin.coroutines.CoroutineContext
 import kotlin.math.log
 
-class MainActivity : AppCompatActivity(),CoroutineScope {
+class MainActivity : AppCompatActivity(), CoroutineScope {
 
     private val TAG: String? = MainActivity::class.java.simpleName
     private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
-    val job = Job()+Dispatchers.IO
+    val job = Job() + Dispatchers.IO
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -45,9 +45,9 @@ class MainActivity : AppCompatActivity(),CoroutineScope {
             val jsonObject = JSONObject(json)
             val array = jsonObject.getJSONArray("words")
             for (i in 0..(array.length() - 1)) {
-                val w=array.getJSONObject(i)
-                val name=w.getString("name")
-                val means=w.getString("means")
+                val w = array.getJSONObject(i)
+                val name = w.getString("name")
+                val means = w.getString("means")
                 Log.d(TAG, "onCreate: ${name} : ${means}")
             }
 
