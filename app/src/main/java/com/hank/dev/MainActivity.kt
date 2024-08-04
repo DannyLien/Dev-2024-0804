@@ -56,7 +56,9 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
         val recyler = binding.contentView.recycler
         recyler.setHasFixedSize(true)
         recyler.layoutManager = LinearLayoutManager(this)
-        recyler.adapter = NameAdapter(names)
+        viewModel.words.observe(this) { words ->
+            recyler.adapter = WordAdapter(words)
+        }
 
     }
 
