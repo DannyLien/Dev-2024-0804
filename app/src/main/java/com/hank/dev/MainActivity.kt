@@ -15,8 +15,10 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
+import org.json.JSONObject
 import java.net.URL
 import kotlin.coroutines.CoroutineContext
+import kotlin.math.log
 
 class MainActivity : AppCompatActivity(),CoroutineScope {
 
@@ -40,6 +42,15 @@ class MainActivity : AppCompatActivity(),CoroutineScope {
         launch {
             val json = URL("https://api.jsonserve.com/pcLzBT").readText()
             Log.d(TAG, "onCreate: ${json}")
+            val jsonObject = JSONObject(json)
+            val array = jsonObject.getJSONArray("words")
+            for (i in 0..(array.length() - 1)) {
+                val w=array.getJSONObject(i)
+                val name=w.getString("name")
+                val means=w.getString("means")
+                Log.d(TAG, "onCreate: ${name} : ${means}")
+            }
+
         }
 
     }
