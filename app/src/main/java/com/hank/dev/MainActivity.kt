@@ -114,7 +114,9 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
             }
 
             R.id.action_test -> {
-                Toast.makeText(this, "You choose Test", Toast.LENGTH_LONG).show()
+                Intent(this, NewsActivity::class.java).also {
+                    startActivity(it)
+                }
                 true
             }
 
