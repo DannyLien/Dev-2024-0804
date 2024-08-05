@@ -101,6 +101,12 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
         return true
     }
 
+    private val getCache: Intent
+        get() {
+            val cache = Intent(this, CatchService::class.java)
+            return cache
+        }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.action_settings -> true
@@ -114,9 +120,11 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
             }
 
             R.id.action_test -> {
-                Intent(this, NewsActivity::class.java).also {
-                    startActivity(it)
-                }
+//                Intent(this, NewsActivity::class.java).also {
+//                    startActivity(it)
+//                }
+                val cache = getCache
+                startService(cache)
                 true
             }
 
@@ -132,5 +140,8 @@ class MainActivity : AppCompatActivity(), CoroutineScope {
     override val coroutineContext: CoroutineContext
         get() = job
 
-
+    override fun onStop() {
+        super.onStop()
+        stopService(getCache)
+    }
 }
